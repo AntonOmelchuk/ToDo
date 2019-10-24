@@ -3,7 +3,7 @@ import './App.css';
 import List from "./List";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {ADD_TODO} from "./types";
+import {addTodolist} from "./actions/todoActions";
 
 class App extends React.Component {
 
@@ -17,7 +17,7 @@ class App extends React.Component {
             tasks: []
         };
 
-        this.props.addTodoList(newTodoList);
+        this.props.addTodolist(newTodoList);
 
         this.nextTodoListId++;
     };
@@ -45,11 +45,5 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addTodoList: newTodoList => dispatch({type: ADD_TODO, payload: newTodoList})
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, {addTodolist})(App);
 

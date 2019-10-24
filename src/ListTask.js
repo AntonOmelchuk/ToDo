@@ -23,18 +23,29 @@ class ListTask extends React.Component {
         this.setState({editMode: false});
     };
 
+    deleteTask = () => {
+        this.props.deleteTask(this.props.task.id)
+    };
+
     render = () => {
+
+        const {id, title, isDone, priority} = this.props.task;
 
         let containerCssClass = this.props.task.isDone ? "todoList-task done" : "todoList-task";
 
         return (
                 <div className={containerCssClass}>
-                    <input type="checkbox" checked={this.props.task.isDone}
-                           onChange={this.onIsDoneChanged}/>
-                    {this.state.editMode
-                        ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true} value={this.props.task.title} />
-                        : <span onClick={this.activateEditMode}>{this.props.task.id} - {this.props.task.title}</span>
-                    }, priority: {this.props.task.priority}
+                    <div>
+                        <input type="checkbox" checked={isDone}
+                               onChange={this.onIsDoneChanged}/>
+                        {this.state.editMode
+                            ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true} value={title} />
+                            : <span onClick={this.activateEditMode}>{id} - {title}</span>
+                        }, priority: {priority}
+                    </div>
+                    <div>
+                        <button onClick={this.deleteTask}>&times;</button>
+                    </div>
                 </div>
         );
     }

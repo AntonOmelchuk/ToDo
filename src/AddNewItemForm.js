@@ -11,11 +11,10 @@ class AddNewItemForm extends React.Component {
         let newText = this.state.title;
         this.setState({title: ""});
 
-        if (newText === "") {
+        if (!newText) {
             this.setState({error: true});
         } else {
             this.setState({error: false});
-            // передаём новый текст наружу
             this.props.addItem(newText);
         }
     };

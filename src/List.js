@@ -5,7 +5,7 @@ import ListFooter from "./ListFooter";
 import ListTitle from "./ListTitle";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {ADD_TASK, CHANGE_TASK} from "./types";
+import {addTask, changeTask, deleteTodolist} from "./actions/todoActions";
 
 class List extends React.Component {
     constructor(props) {
@@ -17,11 +17,6 @@ class List extends React.Component {
 
     nextTaskId = 1;
 
-    state = {
-        tasks: [],
-        filterValue: "All"
-    };
-
     addTask = newText => {
         let newTask = {
             id: this.nextTaskId,
@@ -30,8 +25,7 @@ class List extends React.Component {
             priority: "low"
         };
         this.nextTaskId++;
-        this.props.addTask(newTask, this.props.id)
-
+        this.props.addTask(newTask, this.props.id);
     };
 
     changeFilter = (newFilterValue) => {
@@ -52,16 +46,21 @@ class List extends React.Component {
         this.changeTask(taskId, {title: title});
     };
 
+    deleteTodolist = id => {
+        this.props.deleteTodolist(id)
+    };
+
     render = () => {
         return (
             <div className="todoList">
                 <div className="todoList-header">
-                        <ListTitle title={this.props.title}/>
+                        <ListTitle title={this.props.title} deleteTodolist={this.deleteTodolist} id={this.props.id} />
                         <AddNewItemForm addItem={this.addTask} />
                 </div>
 
                 <ListTasks changeStatus={this.changeStatus }
                            changeTitle={this.changeTitle }
+                           id={this.props.id}
                            tasks={this.props.tasks.filter(t => {
                     if (this.state.filterValue === "All") {
                         return true;
@@ -78,20 +77,5 @@ class List extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addTask: (newTask, id) => dispatch({
-            type: ADD_TASK,
-            payload: {newTask, id}
-        }),
-        changeTask: (taskId, obj, id) => {
-            dispatch({
-                type: CHANGE_TASK,
-                payload: {taskId, obj, id}
-            })
-        }
-    }
-};
-
-export default connect(null, mapDispatchToProps)(List);
+export default connect(null, {addTask, deleteTodolist, changeTask})(List);
 

@@ -3,16 +3,8 @@
   flex-direction: row;
 }
 
-.title__wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .todoList {
   width: 300px;
-  border: 1px solid #333;
-  margin: 12px;
 }
 
 .todoList > div {
@@ -20,8 +12,7 @@
 }
 
 .todoList-task {
-  display: flex;
-  justify-content: space-between;
+
 }
 
 .todoList-task.done {

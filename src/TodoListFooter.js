@@ -1,7 +1,7 @@
 import React from 'react';
 import '../src/App.css';
 
-class ListFooter extends React.Component {
+class TodoListFooter extends React.Component {
 
     state = {
         isHidden: false
@@ -34,5 +34,5 @@ class ListFooter extends React.Component {
     }
 }
 
-export default ListFooter;
+export default TodoListFooter;
 

@@ -1,35 +1,45 @@
 import React from 'react';
 import './App.css';
-import List from "./List";
+import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {addTodolist} from "./actions/todoActions";
+import {addTodolistAC, setTodolistsAC} from "./reducer";
+import {api} from './api'
 
 class App extends React.Component {
 
-    nextTodoListId = 4;
+    state = {
+        todolists: []
+    }
 
-    addTodoList = title => {
+    addTodoList = (title) => {
+        api.createTodo(title)
+            .then(res => {
+                let todolist = res.data.data.item;                           // todolist, который создался на серваке и вернулся нам
+                this.props.addTodolist(todolist);
+            });
+    };
 
-        let newTodoList = {
-            id: this.nextTodoListId,
-            title: title,
-            tasks: []
-        };
+    componentDidMount() {
+        this.restoreState();
+    }
 
-        this.props.addTodolist(newTodoList);
-
-        this.nextTodoListId++;
+    restoreState = () => {
+        api.getTodos()
+            .then(res => {
+                this.props.setTodolists(res.data);
+            });
     };
 
     render = () => {
-        const todolists = this.props.todolists.map(tl => <List id={tl.id} title={tl.title} tasks={tl.tasks} key={tl.id} />);
+        const todolists = this.props
+            .todolists
+            .map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>)
 
         return (
             <>
-                {/*<NavBar />*/}
                 <div>
-                   <AddNewItemForm addItem={this.addTodoList} />
+                    <AddNewItemForm addItem={this.addTodoList}/>
                 </div>
                 <div className="App">
                     {todolists}
@@ -39,11 +49,25 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         todolists: state.todolists
     }
-};
+}
 
-export default connect(mapStateToProps, {addTodolist})(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setTodolists: (todolists) => {
+            const action = setTodolistsAC(todolists);
+            dispatch(action)
+        },
+        addTodolist: (newTodolist) => {
+            const action = addTodolistAC(newTodolist);
+            dispatch(action)
+        }
+    }
+}
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+export default ConnectedApp;
 

@@ -1,10 +1,12 @@
-export const ADD_TODOLIST = "TodoList/Reducer/ADD-TODOLIST";
-export const DELETE_TODOLIST = "TodoList/Reducer/DELETE-TODOLIST";
-export const DELETE_TASK = "TodoList/Reducer/DELETE-TASK";
-export const ADD_TASK = "TodoList/Reducer/ADD-TASK";
-export const SET_TASKS = "TodoList/Reducer/SET_TASKS";
-export const UPDATE_TASK = "TodoList/Reducer/UPDATE-TASK";
-export const SET_TODOLISTS = "TodoList/Reducer/SET_TODOLISTS";
+import {
+    ADD_TASK,
+    ADD_TODOLIST,
+    DELETE_TASK,
+    DELETE_TODOLIST,
+    SET_TASKS,
+    SET_TODOLISTS, UPDATE_TASK,
+    UPDATE_TODO_TITLE
+} from "./actions/types";
 
 const initialState = {
     "todolists": [
@@ -22,10 +24,10 @@ const initialState = {
         {"id": 2, "title": "weewwe`", tasks: []},
         {"id": 3, "title": "dddd", tasks: []}
     ]
-}
+};
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
+    switch(action.type) {
         case SET_TASKS:
             return {
                 ...state,
@@ -36,22 +38,22 @@ const reducer = (state = initialState, action) => {
                         return {...tl, tasks: action.tasks}
                     }
                 })
-            }
+            };
         case SET_TODOLISTS:
             return {
                 ...state,
                 todolists: action.todolists.map(tl => ({...tl, tasks: []}))
-            }
+            };
         case ADD_TODOLIST:
             return {
                 ...state,
                 todolists: [...state.todolists, action.newTodolist]
-            }
+            };
         case DELETE_TODOLIST:
             return {
                 ...state,
                 todolists: state.todolists.filter(tl => tl.id != action.todolistId)
-            }
+            };
         case DELETE_TASK:
             return {
                 ...state,
@@ -65,7 +67,7 @@ const reducer = (state = initialState, action) => {
                         return tl
                     }
                 })
-            }
+            };
         case ADD_TASK:
             return {
                 ...state,
@@ -76,7 +78,18 @@ const reducer = (state = initialState, action) => {
                         return tl
                     }
                 })
-            }
+            };
+        case UPDATE_TODO_TITLE:
+            return {
+                ...state,
+                todolists: state.todolists.map(tl => {
+                    if(tl.id === action.payload.id) {
+                        return {...tl, title: action.payload.title}
+                    } else {
+                        return tl
+                    }
+                })
+            };
         case UPDATE_TASK:
             return {
                 ...state,
@@ -96,50 +109,9 @@ const reducer = (state = initialState, action) => {
                         return tl
                     }
                 })
-            }
-    }
-    console.log("reducer: ", action);
-    return state;
-}
-
-export const updateTaskAC = (taskId, obj, todolistId) => {
-    return { type: UPDATE_TASK, taskId, obj, todolistId };
-};
-
-export const deleteTodolistAC = (todolistId) => {
-    return {
-        type: DELETE_TODOLIST,
-        todolistId: todolistId
-    };
-};
-
-export const deleteTaskAC = (todolistId, taskId) => {
-    return {
-        type: DELETE_TASK,
-        todolistId,
-        taskId
-    };
-};
-
-export const addTaskAC = (newTask, todolistId) => {
-    return { type: ADD_TASK, newTask, todolistId };
-};
-
-export const setTasksAC = (tasks, todolistId) => {
-    return { type: SET_TASKS, tasks, todolistId };
-};
-
-export const addTodolistAC = (newTodolist) => {
-    return {
-        type: ADD_TODOLIST,
-        newTodolist: newTodolist
-    }
-};
-
-export const setTodolistsAC = (todolists) => {
-    return {
-        type: SET_TODOLISTS,
-        todolists: todolists
+            };
+        default:
+            return state;
     }
 };
 

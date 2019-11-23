@@ -23,7 +23,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
     const addTask = (newText) => {
         api.addTask(id, newText)
             .then(res => {
-                let newTask = res.data.data.item;                           // task, который создался на серваке и вернулся нам
+                let newTask = res.data.data.item;
                 addTaskAC(newTask, id);
             });
     };

@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
                     if (tl.id !== action.todolistId) {
                         return tl;
                     } else {
-                        return {...tl, tasks: action.tasks}
+                        return {...tl, tasks: action.tasks};
                     }
                 })
             };
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
         case DELETE_TODOLIST:
             return {
                 ...state,
-                todolists: state.todolists.filter(tl => tl.id != action.todolistId)
+                todolists: state.todolists.filter(tl => tl.id !== action.todolistId)
             };
         case DELETE_TASK:
             return {
@@ -62,9 +62,9 @@ const reducer = (state = initialState, action) => {
                         return {
                             ...tl,
                             tasks: tl.tasks.filter(t => t.id !== action.taskId)
-                        }
+                        };
                     } else {
-                        return tl
+                        return tl;
                     }
                 })
             };
@@ -73,9 +73,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 todolists: state.todolists.map(tl => {
                     if (tl.id === action.todolistId) {
-                        return {...tl, tasks: [...tl.tasks, action.newTask]}
+                        return {...tl, tasks: [...tl.tasks, action.newTask]};
                     } else {
-                        return tl
+                        return tl;
                     }
                 })
             };
@@ -84,9 +84,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 todolists: state.todolists.map(tl => {
                     if(tl.id === action.payload.id) {
-                        return {...tl, title: action.payload.title}
+                        return {...tl, title: action.payload.title};
                     } else {
-                        return tl
+                        return tl;
                     }
                 })
             };
@@ -98,15 +98,15 @@ const reducer = (state = initialState, action) => {
                         return {
                             ...tl,
                             tasks: tl.tasks.map(t => {
-                                if (t.id != action.taskId) {
+                                if (t.id !== action.taskId) {
                                     return t;
                                 } else {
                                     return {...t, ...action.obj};
                                 }
                             })
-                        }
+                        };
                     } else {
-                        return tl
+                        return tl;
                     }
                 })
             };

@@ -16,8 +16,8 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
     const [filterValue, setFilterValue] = useState('All');
 
     useEffect(() => {
-        getTodo(id)
-    }, []);
+        getTodo(id);
+    }, [getTodo, id]);
 
 
     const addTask = (newText) => {
@@ -38,7 +38,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
                         updateTaskAC(taskId, obj, id);
                     });
             }
-        })
+        });
 
 
     };
@@ -68,13 +68,13 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
     const updateTodoTitle = (title) => {
         api.updateTodoTitle(id, title)
             .then(res => {
-                updateTodoTitleAC(id, title)
-            })
+                updateTodoTitleAC(id, title);
+            });
     };
 
         return (
-                <div className="todoList">
-                    <div className="todoList-header">
+                <div className='todoList'>
+                    <div className='todoList-header'>
                             <TodoListTitle title={title} onUpdateTodoTitle={updateTodoTitle}
                                            onDelete={deleteTodolist} />
                             <AddNewItemForm addItem={addTask} />
@@ -85,15 +85,15 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
                                    changeTitle={changeTitle }
                                    deleteTask={deleteTask}
                                    tasks={tasks.filter(t => {
-                        if (filterValue === "All") {
-                            return true;
-                        }
-                        if (filterValue === "Active") {
-                            return t.isDone === false;
-                        }
-                        if (filterValue === "Completed") {
-                            return t.isDone === true;
-                        }
+                                        if (filterValue === "All") {
+                                            return true;
+                                        }
+                                        if (filterValue === "Active") {
+                                            return t.isDone === false;
+                                        }
+                                        if (filterValue === "Completed") {
+                                            return t.isDone === true;
+                                        }
                     })}/>
                     <TodoListFooter changeFilter={changeFilter} filterValue={filterValue} />
                 </div>

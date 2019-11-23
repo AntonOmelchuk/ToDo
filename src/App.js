@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {api} from './api'
+import {api} from './api';
 import {addTodolistAC, getTodos} from "./actions/todoActions";
 
 const App = ({todolists, getTodos, addTodolistAC}) => {
@@ -17,17 +17,17 @@ const App = ({todolists, getTodos, addTodolistAC}) => {
     };
 
     useEffect(() => {
-        getTodos()
-    }, [todolists]);
+        getTodos();
+    }, [getTodos, todolists]);
 
-    const todolist = todolists.map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>)
+    const todolist = todolists.map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>);
 
         return (
             <>
                 <div>
                     <AddNewItemForm addItem={addToTodoList}/>
                 </div>
-                <div className="App">
+                <div className='App'>
                     {todolist}
                 </div>
             </>
@@ -37,7 +37,7 @@ const App = ({todolists, getTodos, addTodolistAC}) => {
 const mapStateToProps = (state) => {
     return {
         todolists: state.todolists
-    }
+    };
 };
 
 export default connect(mapStateToProps, {addTodolistAC, getTodos})(App);

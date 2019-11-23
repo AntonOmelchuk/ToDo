@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './App.css';
 
 const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
 
@@ -8,7 +7,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
         title: task.title
     };
 
-    const [state, setState] = useState(defaultState)
+    const [state, setState] = useState(defaultState);
 
 
     const onIsDoneChanged = (e) => {
@@ -34,7 +33,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
 
     let containerCssClass = task.isDone ? "todoList-task done" : "todoList-task";
     let priotityTitle = "";
-    switch (task.priority) {
+    switch(task.priority) {
         case 0: priotityTitle = "Low"; break;
         case 1: priotityTitle = "Middle"; break;
         case 2: priotityTitle = "High"; break;
@@ -43,7 +42,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
     }
     return (
             <div className={containerCssClass}>
-                <input type="checkbox" checked={task.status == 2}
+                <input type='checkbox' checked={task.status === 2}
                        onChange={onIsDoneChanged}/>
                 { state.editMode
                     ? <input onBlur={deactivateEditMode} onChange={onTitleChanged} autoFocus={true} value={state.title} />
@@ -52,7 +51,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
             </div>
     );
 
-}
+};
 
 export default TodoListTask;
 

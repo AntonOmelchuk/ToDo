@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import TodoListTask from "./TodoListTask";
 
 const TodoListTasks = ({tasks, changeStatus, changeTitle, deleteTask}) => {
@@ -10,7 +9,7 @@ const TodoListTasks = ({tasks, changeStatus, changeTitle, deleteTask}) => {
                       deleteTask={deleteTask}
         />);
     return (
-        <div className="todoList-tasks">
+        <div className='todoList-tasks'>
             {tasksElements}
         </div>
     );

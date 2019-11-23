@@ -14,7 +14,7 @@ export const getTodos = () => async dispatch => {
     try {
         const response = await api.getTodos();
 
-        dispatch(setTodolistsAC(response.data))
+        dispatch(setTodolistsAC(response.data));
     } catch(err) {
 
     }
@@ -30,7 +30,7 @@ export const getTodo = id => async dispatch => {
     } catch(err) {
 
     }
-}
+};
 
 export const updateTaskAC = (taskId, obj, todolistId) => {
     return { type: UPDATE_TASK, taskId, obj, todolistId };
@@ -63,14 +63,14 @@ export const addTodolistAC = newTodolist => {
     return {
         type: ADD_TODOLIST,
         newTodolist: newTodolist
-    }
+    };
 };
 
 export const setTodolistsAC = todolists => {
     return {
         type: SET_TODOLISTS,
         todolists: todolists
-    }
+    };
 };
 
 export const updateTodoTitleAC = (id, title) => {
@@ -80,5 +80,5 @@ export const updateTodoTitleAC = (id, title) => {
             id,
             title
         }
-    })
-}
+    });
+};

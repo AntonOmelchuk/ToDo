@@ -7,12 +7,12 @@ const TodoListTitle = ({title, onDelete, onUpdateTodoTitle}) => {
     const [editMode, setEditMode] = useState(false);
 
     const handleUpdateTodoTitle = () => {
-        onUpdateTodoTitle(localTitle)
+        onUpdateTodoTitle(localTitle);
         setEditMode(false);
-    }
+    };
 
     return (
-            <h3 className="todoList-header__title" onDoubleClick={() => setEditMode(true)}>
+            <h3 className='todoList-header__title' onDoubleClick={() => setEditMode(true)}>
                 {editMode
                     ? <input value={localTitle} onChange={(e) => setTitle(e.target.value)} autoFocus={true}
                     onBlur={handleUpdateTodoTitle} />
@@ -23,7 +23,7 @@ const TodoListTitle = ({title, onDelete, onUpdateTodoTitle}) => {
                 </button>
             </h3>
     );
-}
+};
 
 export default TodoListTitle;
 

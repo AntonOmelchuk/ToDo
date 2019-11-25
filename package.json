@@ -41,5 +41,16 @@
     "husky": "^3.1.0",
     "lint-staged": "^9.4.3",
     "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ja,jsx}": [
+      "npm run lint:fix",
+      "git add"
+    ]
   }
 }

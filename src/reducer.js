@@ -6,7 +6,7 @@ import {
     SET_TASKS,
     SET_TODOLISTS, UPDATE_TASK,
     UPDATE_TODO_TITLE
-} from "./actions/types";
+} from './actions/types';
 
 const initialState = {
     todolists: []

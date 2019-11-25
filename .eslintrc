@@ -9,6 +9,8 @@
     }
   },
   "rules": {
+    "no-console": 1,
+    "no-debugger": 1,
     "jsx-quotes": [1, "prefer-single"],
     "quotes": ["error", "single", {"allowTemplateLiterals": true}],
     "semi": 0,

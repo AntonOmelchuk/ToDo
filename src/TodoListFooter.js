@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
-import '../src/App.css';
 
 const TodoListFooter = ({changeFilter, filterValue}) => {
 
     const [isHidden, setIsHidden] = useState(false);
-
-    const onAllFilterClick = () => { changeFilter('All')};
-    const onCompletedFilterClick = () => { changeFilter('Completed')};
-    const onActiveFilterClick = () => { changeFilter('Active')};
-    const onShowFiltersClick = () => { setIsHidden(true)};
-    const onHideFiltersClick = () => { setIsHidden(false)};
 
     const classForAll = filterValue === 'All' ? 'filter-active' : '';
     const classForCompleted = filterValue === 'Completed' ? 'filter-active' : '';
@@ -18,13 +11,13 @@ const TodoListFooter = ({changeFilter, filterValue}) => {
     return (
         <div className='todoList-footer'>
             { !isHidden && <div>
-                 <button onClick={ onAllFilterClick } className={classForAll}>All</button>
-                 <button onClick={ onCompletedFilterClick } className={classForCompleted}>Completed</button>
-                 <button onClick={ onActiveFilterClick } className={classForActive}>Active</button>
+                 <button onClick={() => changeFilter('All')} className={classForAll}>All</button>
+                 <button onClick={() => changeFilter('Completed')} className={classForCompleted}>Completed</button>
+                 <button onClick={() => changeFilter('Active')} className={classForActive}>Active</button>
               </div>
             }
-            { !isHidden && <span onClick={ onShowFiltersClick }>hide</span> }
-            { isHidden && <span onClick={ onHideFiltersClick }>show</span> }
+            { !isHidden && <span onClick={() => setIsHidden(true)}>hide</span> }
+            { isHidden && <span onClick={() => setIsHidden(false)}>show</span> }
         </div>
     );
 };

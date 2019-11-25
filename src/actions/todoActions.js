@@ -7,21 +7,21 @@ import {
     SET_TODOLISTS,
     UPDATE_TASK,
     UPDATE_TODO_TITLE
-} from "./types";
-import {api} from "../api";
+} from './types';
+import {api} from '../api';
 
 export const updateTaskAC = (taskId, obj, todolistId) => {
     return { type: UPDATE_TASK, taskId, obj, todolistId };
 };
 
-export const deleteTodolistAC = todolistId => {
+const deleteTodolistAC = todolistId => {
     return {
         type: DELETE_TODOLIST,
         todolistId: todolistId
     };
 };
 
-export const deleteTaskAC = (todolistId, taskId) => {
+const deleteTaskAC = (todolistId, taskId) => {
     return {
         type: DELETE_TASK,
         todolistId,
@@ -29,11 +29,11 @@ export const deleteTaskAC = (todolistId, taskId) => {
     };
 };
 
-export const addTaskAC = (newTask, todolistId) => {
+const addTaskAC = (newTask, todolistId) => {
     return { type: ADD_TASK, newTask, todolistId };
 };
 
-export const setTasksAC = (tasks, todolistId) => {
+const setTasksAC = (tasks, todolistId) => {
     return { type: SET_TASKS, tasks, todolistId };
 };
 
@@ -73,7 +73,7 @@ export const getTodos = () => async dispatch => {
 export const getTodo = id => async dispatch => {
     try {
         const response = await api.getTodo(id);
-        dispatch(setTasksAC(id, response.data));
+        dispatch(setTasksAC(response.data.items, id));
     } catch(err) {
 
     }
@@ -83,6 +83,34 @@ export const addTodo = title => async dispatch => {
     try {
         const response = await api.createTodo(title);
         dispatch(addTodolistAC(response.data.data.item));
+    } catch(err) {
+
+    }
+};
+
+export const addTaskThunk = (id, title) => async dispatch => {
+    try {
+        const response = await api.addTask(id, title);
+        dispatch(addTaskAC(response.data.data.item, id))
+    } catch(err) {
+
+    }
+};
+
+export const deleteTodoThunk = id => async dispatch => {
+    try {
+        await api.deleteTodo(id);
+        dispatch(deleteTodolistAC(id))
+
+    } catch(err) {
+
+    }
+};
+
+export const deleteTaskThunk = (taskId, id) => async dispatch => {
+    try {
+        await api.deleteTask(taskId);
+        dispatch(deleteTaskAC(id, taskId))
     } catch(err) {
 
     }

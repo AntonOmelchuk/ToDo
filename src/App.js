@@ -15,8 +15,6 @@ const App = ({todolists, getTodos, addTodo}) => {
         getTodos();
     }, [getTodos]);
 
-    console.log(todolists);
-
     const todolist = todolists.map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>);
 
         return (

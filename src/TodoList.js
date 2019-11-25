@@ -5,12 +5,12 @@ import TodoListFooter from './TodoListFooter';
 import TodoListTitle from './TodoListTitle';
 import AddNewItemForm from './AddNewItemForm';
 import {connect} from 'react-redux';
-import {getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC, setTasksAC,
+import {getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
     updateTaskAC, updateTodoTitleAC} from './actions/todoActions';
 import {api} from './api';
 
 
-const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC,
+const TodoList = ({id, tasks, title, getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
                       updateTaskAC, updateTodoTitleAC}) => {
 
     const [filterValue, setFilterValue] = useState('All');
@@ -20,13 +20,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
     }, [getTodo, id]);
 
 
-    const addTask = (newText) => {
-        api.addTask(id, newText)
-            .then(res => {
-                let newTask = res.data.data.item;
-                addTaskAC(newTask, id);
-            });
-    };
+    const addTask = newText => addTaskThunk(id, newText);
 
     const changeFilter = newFilterValue => setFilterValue(newFilterValue);
 
@@ -39,8 +33,6 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
                     });
             }
         });
-
-
     };
 
     const changeStatus = (taskId, status) => {
@@ -51,19 +43,9 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
         changeTask(taskId, {title: title});
     };
 
-    const deleteTodolist = () => {
-        api.deleteTodo(id)
-            .then(res => {
-                deleteTodolistAC(id);
-            });
-    };
+    const deleteTodolist = () => deleteTodoThunk(id);
 
-    const deleteTask = (taskId) => {
-        api.deleteTask(taskId)
-            .then(res => {
-                deleteTaskAC(taskId, id);
-            });
-    };
+    const deleteTask = taskId => deleteTaskThunk(taskId, id);
 
     const updateTodoTitle = (title) => {
         api.updateTodoTitle(id, title)
@@ -89,10 +71,10 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
                                             return true;
                                         }
                                         if (filterValue === 'Active') {
-                                            return t.isDone === false;
+                                            return t.completed === false;
                                         }
                                         if (filterValue === 'Completed') {
-                                            return t.isDone === true;
+                                            return t.completed === true;
                                         }
                     })}/>
                     <TodoListFooter changeFilter={changeFilter} filterValue={filterValue} />
@@ -100,7 +82,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
         );
 };
 
-const ConnectedTodolist = connect(null, {getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC, setTasksAC,
+const ConnectedTodolist = connect(null, {getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
     updateTaskAC, updateTodoTitleAC})(TodoList);
 
 export default ConnectedTodolist;

@@ -10,13 +10,14 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
     const [state, setState] = useState(defaultState);
 
 
-    const onIsDoneChanged = (e) => {
-        let status = e.currentTarget.checked ? 2 : 0;
+    const onCompletedChanged = e => {
+        const status = e.currentTarget.checked ? 0 : 2;
         changeStatus(task.id, status);
     };
 
     const onTitleChanged = (e) => {
         setState({title: e.target.value});
+        changeTitle(task.id, state.title)
     };
 
     const activateEditMode = () => {
@@ -31,7 +32,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
         deleteTask(task.id);
     };
 
-    let containerCssClass = task.isDone ? 'todoList-task done' : 'todoList-task';
+    let containerCssClass = task.completed ? 'todoList-task done' : 'todoList-task';
     let priotityTitle = '';
     switch(task.priority) {
         case 0: priotityTitle = 'Low'; break;
@@ -43,12 +44,12 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
     return (
             <div className={containerCssClass}>
                 <input type='checkbox' checked={task.status === 2}
-                       onChange={onIsDoneChanged}/>
+                       onChange={onCompletedChanged} />
                 { state.editMode
                     ? <input onBlur={deactivateEditMode} onChange={onTitleChanged} autoFocus={true}
                              value={state.title} />
                     : <span onClick={activateEditMode}>{task.title}</span>
-                }, priority: {priotityTitle} <button onClick={onDeleteTask}>X</button>
+                }, priority: {priotityTitle} <button onClick={onDeleteTask}>&times;</button>
             </div>
     );
 

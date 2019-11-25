@@ -6,12 +6,12 @@ import TodoListTitle from './TodoListTitle';
 import AddNewItemForm from './AddNewItemForm';
 import {connect} from 'react-redux';
 import {getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
-    updateTaskAC, updateTodoTitleAC} from './actions/todoActions';
+    changeTaskThunk, updateTodoTitleAC} from './actions/todoActions';
 import {api} from './api';
 
 
 const TodoList = ({id, tasks, title, getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
-                      updateTaskAC, updateTodoTitleAC}) => {
+                      changeTaskThunk, updateTodoTitleAC}) => {
 
     const [filterValue, setFilterValue] = useState('All');
 
@@ -26,21 +26,17 @@ const TodoList = ({id, tasks, title, getTodo, addTaskThunk, deleteTaskThunk, del
 
     const changeTask = (taskId, obj) => {
         tasks.forEach(t => {
-            if (t.id === taskId) {
-                api.changeTask({...t, ...obj})
-                    .then(res => {
-                        updateTaskAC(taskId, obj, id);
-                    });
-            }
+            if (t.id === taskId) changeTaskThunk(taskId, obj, id)
         });
     };
 
     const changeStatus = (taskId, status) => {
-        changeTask(taskId, {status: status});
+        console.log(taskId, status)
+        changeTask(taskId, status);
     };
 
     const changeTitle = (taskId, title) => {
-        changeTask(taskId, {title: title});
+        changeTask(taskId, title);
     };
 
     const deleteTodolist = () => deleteTodoThunk(id);
@@ -83,7 +79,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskThunk, deleteTaskThunk, del
 };
 
 const ConnectedTodolist = connect(null, {getTodo, addTaskThunk, deleteTaskThunk, deleteTodoThunk,
-    updateTaskAC, updateTodoTitleAC})(TodoList);
+    changeTaskThunk, updateTodoTitleAC})(TodoList);
 
 export default ConnectedTodolist;
 

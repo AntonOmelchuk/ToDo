@@ -116,3 +116,12 @@ export const deleteTaskThunk = (taskId, id) => async dispatch => {
     }
 };
 
+export const changeTaskThunk = (taskId, task, todoId) => async dispatch => {
+    try {
+        const response = await api.changeTask(taskId, task, todoId)
+        console.log(response)
+    } catch(err) {
+
+    }
+};
+

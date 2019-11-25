@@ -30,7 +30,7 @@ export const api = {
     deleteTask(taskId) {
         return instance.delete(`tasks/${taskId}`);
     },
-    changeTask(task) {
-        return instance.put(`tasks`, task);
+    changeTask(taskId, task, todoId) {
+        return instance.put(`${todoId}/tasks/${taskId}`, task);
     }
 };

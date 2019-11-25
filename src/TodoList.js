@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import TodoListTasks from "./TodoListTasks";
-import TodoListFooter from "./TodoListFooter";
-import TodoListTitle from "./TodoListTitle";
-import AddNewItemForm from "./AddNewItemForm";
-import {connect} from "react-redux";
+import TodoListTasks from './TodoListTasks';
+import TodoListFooter from './TodoListFooter';
+import TodoListTitle from './TodoListTitle';
+import AddNewItemForm from './AddNewItemForm';
+import {connect} from 'react-redux';
 import {getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC, setTasksAC,
     updateTaskAC, updateTodoTitleAC} from './actions/todoActions';
-import {api} from "./api";
+import {api} from './api';
 
 
-const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC, setTasksAC,
+const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTodolistAC,
                       updateTaskAC, updateTodoTitleAC}) => {
 
     const [filterValue, setFilterValue] = useState('All');
 
     useEffect(() => {
         getTodo(id);
-    }, []);
+    }, [getTodo, id]);
 
 
     const addTask = (newText) => {
@@ -85,13 +85,13 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
                                    changeTitle={changeTitle }
                                    deleteTask={deleteTask}
                                    tasks={tasks.filter(t => {
-                                        if (filterValue === "All") {
+                                        if (filterValue === 'All') {
                                             return true;
                                         }
-                                        if (filterValue === "Active") {
+                                        if (filterValue === 'Active') {
                                             return t.isDone === false;
                                         }
-                                        if (filterValue === "Completed") {
+                                        if (filterValue === 'Completed') {
                                             return t.isDone === true;
                                         }
                     })}/>

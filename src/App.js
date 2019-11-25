@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import TodoList from "./TodoList";
-import AddNewItemForm from "./AddNewItemForm";
-import {connect} from "react-redux";
-import {addTodo, getTodos} from "./actions/todoActions";
+import TodoList from './TodoList';
+import AddNewItemForm from './AddNewItemForm';
+import {connect} from 'react-redux';
+import {addTodo, getTodos} from './actions/todoActions';
 
 const App = ({todolists, getTodos, addTodo}) => {
 

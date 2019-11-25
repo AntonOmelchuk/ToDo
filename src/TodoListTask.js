@@ -31,14 +31,14 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
         deleteTask(task.id);
     };
 
-    let containerCssClass = task.isDone ? "todoList-task done" : "todoList-task";
-    let priotityTitle = "";
+    let containerCssClass = task.isDone ? 'todoList-task done' : 'todoList-task';
+    let priotityTitle = '';
     switch(task.priority) {
-        case 0: priotityTitle = "Low"; break;
-        case 1: priotityTitle = "Middle"; break;
-        case 2: priotityTitle = "High"; break;
-        case 3: priotityTitle = "Urgently"; break;
-        case 4: priotityTitle = "Later"; break;
+        case 0: priotityTitle = 'Low'; break;
+        case 1: priotityTitle = 'Middle'; break;
+        case 2: priotityTitle = 'High'; break;
+        case 3: priotityTitle = 'Urgently'; break;
+        case 4: priotityTitle = 'Later'; break;
     }
     return (
             <div className={containerCssClass}>

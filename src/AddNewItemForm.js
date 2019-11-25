@@ -3,21 +3,21 @@ import React, {useState} from 'react';
 const AddNewItemForm = ({addItem}) => {
     const defaultState = {
         error: false,
-        title: ""
+        title: ''
     };
 
     const [state, setState] = useState(defaultState);
 
     const onAddItemClick = () => {
         let newText = state.title;
-        setState({title: ""});
+        setState({title: ''});
 
-        if (newText === "") {
+        if (newText === '') {
             setState({error: true});
         } else {
             setState({error: false});
             addItem(newText);
-            setState({title: ""});
+            setState({title: ''});
         }
     };
 
@@ -29,12 +29,12 @@ const AddNewItemForm = ({addItem}) => {
     };
 
     const onKeyPress = (e) => {
-        if (e.key === "Enter") {
+        if (e.key === 'Enter') {
             onAddItemClick();
         }
     };
 
-    let classNameForInput = state.error ? "error" : "";
+    let classNameForInput = state.error ? 'error' : '';
 
     return (
         <div className='todoList-newTaskForm'>

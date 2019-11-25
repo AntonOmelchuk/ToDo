@@ -1,38 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../src/App.css';
 
-class TodoListFooter extends React.Component {
+const TodoListFooter = ({changeFilter, filterValue}) => {
 
-    state = {
-        isHidden: false
-    }
+    const [isHidden, setIsHidden] = useState(false);
 
-    onAllFilterClick = () => { this.props.changeFilter("All"); }
-    onCompletedFilterClick = () => { this.props.changeFilter("Completed"); }
-    onActiveFilterClick = () => { this.props.changeFilter("Active"); }
-    onShowFiltersClick = () => { this.setState({isHidden: true}); }
-    onHideFiltersClick = () => { this.setState({isHidden: false}); }
+    const onAllFilterClick = () => { changeFilter('All')};
+    const onCompletedFilterClick = () => { changeFilter('Completed')};
+    const onActiveFilterClick = () => { changeFilter('Active')};
+    const onShowFiltersClick = () => { setIsHidden(true)};
+    const onHideFiltersClick = () => { setIsHidden(false)};
 
-    render = (props) => {
+    const classForAll = filterValue === 'All' ? 'filter-active' : '';
+    const classForCompleted = filterValue === 'Completed' ? 'filter-active' : '';
+    const classForActive = filterValue === 'Active' ? 'filter-active' : '';
 
-        let classForAll = this.props.filterValue === "All" ? "filter-active" : "";
-        let classForCompleted = this.props.filterValue === "Completed" ? "filter-active" : "";
-        let classForActive = this.props.filterValue === "Active" ? "filter-active" : "";
-
-        return (
-            <div className='todoList-footer'>
-                { !this.state.isHidden && <div>
-                     <button onClick={ this.onAllFilterClick } className={classForAll}>All</button>
-                     <button onClick={ this.onCompletedFilterClick } className={classForCompleted}>Completed</button>
-                     <button onClick={ this.onActiveFilterClick } className={classForActive}>Active</button>
-                  </div>
-                }
-                { !this.state.isHidden && <span onClick={ this.onShowFiltersClick }>hide</span> }
-                { this.state.isHidden && <span onClick={ this.onHideFiltersClick }>show</span> }
-            </div>
-        );
-    }
-}
+    return (
+        <div className='todoList-footer'>
+            { !isHidden && <div>
+                 <button onClick={ onAllFilterClick } className={classForAll}>All</button>
+                 <button onClick={ onCompletedFilterClick } className={classForCompleted}>Completed</button>
+                 <button onClick={ onActiveFilterClick } className={classForActive}>Active</button>
+              </div>
+            }
+            { !isHidden && <span onClick={ onShowFiltersClick }>hide</span> }
+            { isHidden && <span onClick={ onHideFiltersClick }>show</span> }
+        </div>
+    );
+};
 
 export default TodoListFooter;
 

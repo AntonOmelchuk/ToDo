@@ -17,7 +17,7 @@ const TodoList = ({id, tasks, title, getTodo, addTaskAC, deleteTaskAC, deleteTod
 
     useEffect(() => {
         getTodo(id);
-    }, [getTodo, id]);
+    }, []);
 
 
     const addTask = (newText) => {

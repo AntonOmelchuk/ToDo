@@ -3,7 +3,7 @@ import TodoListTask from "./TodoListTask";
 
 const TodoListTasks = ({tasks, changeStatus, changeTitle, deleteTask}) => {
 
-    let tasksElements = tasks.map( task =>
+    const tasksElements = tasks.map( task =>
         <TodoListTask task={task} changeStatus={changeStatus}
                       changeTitle={changeTitle}
                       deleteTask={deleteTask}

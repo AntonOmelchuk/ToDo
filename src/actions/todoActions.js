@@ -10,28 +10,6 @@ import {
 } from "./types";
 import {api} from "../api";
 
-export const getTodos = () => async dispatch => {
-    try {
-        const response = await api.getTodos();
-
-        dispatch(setTodolistsAC(response.data));
-    } catch(err) {
-
-    }
-};
-
-export const getTodo = id => async dispatch => {
-    try {
-        const response = await api.getTodos()
-            .then(res => {
-                let allTasks = res.data.items;                           // items - это таски сервака
-                this.props.setTasks(allTasks, this.props.id);
-            });
-    } catch(err) {
-
-    }
-};
-
 export const updateTaskAC = (taskId, obj, todolistId) => {
     return { type: UPDATE_TASK, taskId, obj, todolistId };
 };
@@ -59,14 +37,14 @@ export const setTasksAC = (tasks, todolistId) => {
     return { type: SET_TASKS, tasks, todolistId };
 };
 
-export const addTodolistAC = newTodolist => {
+const addTodolistAC = newTodolist => {
     return {
         type: ADD_TODOLIST,
         newTodolist: newTodolist
     };
 };
 
-export const setTodolistsAC = todolists => {
+const setTodolistsAC = todolists => {
     return {
         type: SET_TODOLISTS,
         todolists: todolists
@@ -82,3 +60,31 @@ export const updateTodoTitleAC = (id, title) => {
         }
     });
 };
+
+export const getTodos = () => async dispatch => {
+    try {
+        const response = await api.getTodos();
+        dispatch(setTodolistsAC(response.data));
+    } catch(err) {
+
+    }
+};
+
+export const getTodo = id => async dispatch => {
+    try {
+        const response = await api.getTodo(id);
+        dispatch(setTasksAC(id, response.data));
+    } catch(err) {
+
+    }
+};
+
+export const addTodo = title => async dispatch => {
+    try {
+        const response = await api.createTodo(title);
+        dispatch(addTodolistAC(response.data.data.item));
+    } catch(err) {
+
+    }
+};
+

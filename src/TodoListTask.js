@@ -45,7 +45,7 @@ const TodoListTask = ({task, changeStatus, changeTitle, deleteTask}) => {
                 <input type='checkbox' checked={task.status === 2}
                        onChange={onIsDoneChanged}/>
                 { state.editMode
-                    ? <input onBlur={deactivateEditMode} onChange={onTitleChanged} autoFocus={true} value={state.title} />
+                    ?<input onBlur={deactivateEditMode} onChange={onTitleChanged} autoFocus={true} value={state.title}/>
                     : <span onClick={activateEditMode}>{task.title}</span>
                 }, priority: {priotityTitle} <button onClick={onDeleteTask}>X</button>
             </div>

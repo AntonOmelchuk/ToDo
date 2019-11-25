@@ -9,25 +9,16 @@ import {
 } from "./actions/types";
 
 const initialState = {
-    "todolists": [
-        {
-            "id": 0, "title": "every day",
-            tasks: [
-                {"title": "css11", "isDone": false, "priority": "low", "id": 0},
-                {"title": "js", "isDone": false, "priority": "low", "id": 1},
-                {"title": "react", "isDone": false, "priority": "low", "id": 2},
-                {"title": "sasasa", "isDone": false, "priority": "low", "id": 3},
-                {"title": "yoaa", "isDone": false, "priority": "low", "id": 4},
-                {"title": "sddsdsds", "isDone": false, "priority": "low", "id": 5}]
-        },
-        {"id": 1, "title": "tomorrow", tasks: []},
-        {"id": 2, "title": "weewwe`", tasks: []},
-        {"id": 3, "title": "dddd", tasks: []}
-    ]
+    todolists: []
 };
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case SET_TODOLISTS:
+            return {
+                ...state,
+                todolists: action.todolists.map(tl => ({...tl, tasks: []}))
+            };
         case SET_TASKS:
             return {
                 ...state,
@@ -39,15 +30,10 @@ const reducer = (state = initialState, action) => {
                     }
                 })
             };
-        case SET_TODOLISTS:
-            return {
-                ...state,
-                todolists: action.todolists.map(tl => ({...tl, tasks: []}))
-            };
         case ADD_TODOLIST:
             return {
                 ...state,
-                todolists: [...state.todolists, action.newTodolist]
+                todolists: [...state.todolists, {...action.newTodolist, tasks: []}]
             };
         case DELETE_TODOLIST:
             return {

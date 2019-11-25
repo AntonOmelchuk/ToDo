@@ -3,22 +3,19 @@ import './App.css';
 import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {api} from './api';
-import {addTodolistAC, getTodos} from "./actions/todoActions";
+import {addTodo, getTodos} from "./actions/todoActions";
 
-const App = ({todolists, getTodos, addTodolistAC}) => {
+const App = ({todolists, getTodos, addTodo}) => {
 
-    const addToTodoList = (title) => {
-        api.createTodo(title)
-            .then(res => {
-                let todolist = res.data.data.item;                           // todolist, который создался на серваке и вернулся нам
-                addTodolistAC(todolist);
-            });
+    const addToTodoList = title => {
+        addTodo(title);
     };
 
     useEffect(() => {
         getTodos();
-    }, [getTodos, todolists]);
+    }, [getTodos]);
+
+    console.log(todolists);
 
     const todolist = todolists.map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>);
 
@@ -40,5 +37,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {addTodolistAC, getTodos})(App);
+export default connect(mapStateToProps, {addTodo, getTodos})(App);
 

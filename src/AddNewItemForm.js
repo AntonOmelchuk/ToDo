@@ -17,6 +17,7 @@ const AddNewItemForm = ({addItem}) => {
         } else {
             setState({error: false});
             addItem(newText);
+            setState({title: ""});
         }
     };
 

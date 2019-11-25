@@ -12,6 +12,9 @@ export const api = {
     getTodos() {
         return instance.get('');
     },
+    getTodo(id) {
+        return instance.get(`${id}/tasks`);
+    },
     createTodo(title) {
         return instance.post('',{title} );
     },

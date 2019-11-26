@@ -20,7 +20,7 @@ export interface SetTasksAction {
 
 export interface AddTodolistAction {
     type: typeof ADD_TODOLIST;
-    newTodolist: string;
+    newTodolist: any[];
 }
 
 export interface AddTaskAction {
@@ -52,3 +52,8 @@ export interface UpdateTaskAction {
     obj: any;
     todolistId: string;
 }
+
+export type TodoActionTypes = SetTodolistAction | SetTasksAction | AddTodolistAction | AddTaskAction
+| DeleteTodolistAction | DeleteTaskAction | UpdateTodoTitleAction | UpdateTaskAction;
+
+export type AppTypes = TodoActionTypes;

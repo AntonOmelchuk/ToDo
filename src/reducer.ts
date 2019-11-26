@@ -4,15 +4,17 @@ import {
     DELETE_TASK,
     DELETE_TODOLIST,
     SET_TASKS,
-    SET_TODOLISTS, UPDATE_TASK,
-    UPDATE_TODO_TITLE
+    SET_TODOLISTS,
+    UPDATE_TASK,
+    UPDATE_TODO_TITLE,
+    TodoActionTypes,
 } from './actions/types';
 
-const initialState = {
+const initialState: State = {
     todolists: []
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: TodoActionTypes): State => {
     switch(action.type) {
         case SET_TODOLISTS:
             return {
@@ -47,7 +49,7 @@ const reducer = (state = initialState, action) => {
                     if (tl.id === action.todolistId) {
                         return {
                             ...tl,
-                            tasks: tl.tasks.filter(t => t.id !== action.taskId)
+                            tasks: tl.tasks.filter((t: any) => t.id !== action.taskId)
                         };
                     } else {
                         return tl;
@@ -69,8 +71,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 todolists: state.todolists.map(tl => {
-                    if(tl.id === action.payload.id) {
-                        return {...tl, title: action.payload.title};
+                    if(tl.id === action.id) {
+                        return {...tl, title: action.title};
                     } else {
                         return tl;
                     }
@@ -83,7 +85,7 @@ const reducer = (state = initialState, action) => {
                     if (tl.id === action.todolistId) {
                         return {
                             ...tl,
-                            tasks: tl.tasks.map(t => {
+                            tasks: tl.tasks.map((t: any)=> {
                                 if (t.id !== action.taskId) {
                                     return t;
                                 } else {

@@ -1,3 +1,3 @@
-interface Todo {
-
+interface State {
+    todolists: any[];
 }

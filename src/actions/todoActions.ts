@@ -11,15 +11,15 @@ import {
 import {api} from '../api';
 
 const setTodolistsAC = (todolists: any[]): SetTodolistAction => {
-    return { type: SET_TODOLISTS, todolists: todolists};
+    return { type: SET_TODOLISTS, todolists};
 };
 
 const setTasksAC = (tasks: any[], todolistId: string): SetTasksAction => {
     return { type: SET_TASKS, tasks, todolistId };
 };
 
-const addTodolistAC = (newTodolist: string): AddTodolistAction => {
-    return { type: ADD_TODOLIST, newTodolist: newTodolist };
+const addTodolistAC = (newTodolist: any[]): AddTodolistAction => {
+    return { type: ADD_TODOLIST, newTodolist };
 };
 
 const addTaskAC = (newTask: string, todolistId: string): AddTaskAction => {

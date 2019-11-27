@@ -84,10 +84,10 @@ const TodoList: React.FC<Props> = ({
                         return true;
                     }
                     if (filterValue === 'Active') {
-                        return t.completed === false;
+                        return !t.completed;
                     }
                     if (filterValue === 'Completed') {
-                        return t.completed === true;
+                        return t.completed;
                     }
                 })}
             />

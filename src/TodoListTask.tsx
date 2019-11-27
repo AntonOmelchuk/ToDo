@@ -27,7 +27,7 @@ const TodoListTask: React.FC<Props> = ({task, changeStatus, changeTitle, deleteT
 
     const onDeleteTask = () => deleteTask(task.id);
 
-    let containerCssClass = task.completed ? 'todoList-task done' : 'todoList-task';
+    const containerCssClass = task.completed ? 'todoList-task done' : 'todoList-task';
     let priotityTitle = '';
     switch (task.priority) {
         case 0:
@@ -54,6 +54,7 @@ const TodoListTask: React.FC<Props> = ({task, changeStatus, changeTitle, deleteT
             ) : (
                 <span onClick={activateEditMode}>{task.title}</span>
             )}
+            {', '}
             priority: {priotityTitle} <button onClick={onDeleteTask}>&times;</button>
         </div>
     );

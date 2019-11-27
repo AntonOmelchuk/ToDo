@@ -1,11 +1,19 @@
 interface Task {
+    addedDate: string;
+    deadline: null;
+    description: null;
+    order: number;
+    priority: number;
+    startDate: null;
+    status: number;
+    todolistId: string;
     id: string;
     title: string;
     completed: boolean;
 }
 
 interface Todolist {
-    tasks: any[];
+    tasks: Task[];
     id: string;
     title: string;
 }

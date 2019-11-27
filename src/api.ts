@@ -12,25 +12,25 @@ export const api = {
     getTodos() {
         return instance.get('');
     },
-    getTodo(id) {
+    getTodo(id: string) {
         return instance.get(`${id}/tasks`);
     },
-    createTodo(title) {
-        return instance.post('',{title} );
+    createTodo(title: string) {
+        return instance.post('', {title});
     },
-    addTask(id, title) {
-        return instance.post(`${id}/tasks`,{title});
+    addTask(id: string, title: string) {
+        return instance.post(`${id}/tasks`, {title});
     },
-    updateTodoTitle(id, title) {
+    updateTodoTitle(id: string, title: string) {
         return instance.put(`${id}`, {title});
     },
-    deleteTodo(id) {
+    deleteTodo(id: string) {
         return instance.delete(`${id}`);
     },
-    deleteTask(taskId) {
+    deleteTask(taskId: string) {
         return instance.delete(`tasks/${taskId}`);
     },
-    changeTask(taskId, task, todoId) {
+    changeTask(taskId: string, task: any, todoId: string) {
         return instance.put(`${todoId}/tasks/${taskId}`, task);
     }
 };

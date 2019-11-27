@@ -1,54 +1,49 @@
-// @ts-ignore
 import React, {useState} from 'react';
 
-const AddNewItemForm = ({addItem}) => {
-    const defaultState = {
-        error: false,
-        title: ''
-    };
+interface Props {
+    addItem: (title: string) => void;
+}
 
-    const [state, setState] = useState(defaultState);
+const AddNewItemForm: React.FC<Props> = ({addItem}) => {
+    const [error, setError] = useState(false);
+    const [title, setTitle] = useState('');
 
     const onAddItemClick = () => {
-        let newText = state.title;
-        setState({title: ''});
-
-        if (newText === '') {
-            setState({error: true});
+        if (title === '') {
+            setError(true);
         } else {
-            setState({error: false});
-            addItem(newText);
-            setState({title: ''});
+            setError(false);
+            addItem(title);
+            setTitle('');
         }
     };
 
-    const onTitleChanged = (e) => {
-        setState({
-            error: false,
-            title: e.currentTarget.value
-        });
+    const onTitleChanged = (e: React.FormEvent<HTMLInputElement>) => {
+        setError(false);
+        setTitle(e.currentTarget.value);
     };
 
-    const onKeyPress = (e) => {
+    const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             onAddItemClick();
         }
     };
 
-    let classNameForInput = state.error ? 'error' : '';
+    const classNameForInput = error ? 'error' : '';
 
     return (
-        <div className='todoList-newTaskForm'>
-            <input className={classNameForInput} type='text' placeholder='New item name'
-                   onChange={onTitleChanged}
-                   onKeyPress={onKeyPress}
-                   value={state.title}
+        <div className="todoList-newTaskForm">
+            <input
+                className={classNameForInput}
+                type="text"
+                placeholder="New item name"
+                onChange={onTitleChanged}
+                onKeyPress={onKeyPress}
+                value={title}
             />
             <button onClick={onAddItemClick}>Add</button>
         </div>
-
     );
 };
 
 export default AddNewItemForm;
-

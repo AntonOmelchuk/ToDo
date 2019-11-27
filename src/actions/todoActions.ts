@@ -100,7 +100,8 @@ export const deleteTaskThunk = (taskId: string, id: string) => async (dispatch: 
 export const changeTaskThunk = (taskId: string, task: any, todoId: string) => async (dispatch: Function) => {
     try {
         const response = await api.changeTask(taskId, task, todoId);
-        console.log(response)
+        console.log(response);
+        dispatch(updateTaskAC(taskId, task, todoId))
     } catch(err) {
 
     }

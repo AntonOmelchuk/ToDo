@@ -53,7 +53,14 @@ export interface UpdateTaskAction {
     todolistId: string;
 }
 
-export type TodoActionTypes = SetTodolistAction | SetTasksAction | AddTodolistAction | AddTaskAction
-| DeleteTodolistAction | DeleteTaskAction | UpdateTodoTitleAction | UpdateTaskAction;
+export type TodoActionTypes =
+    | SetTodolistAction
+    | SetTasksAction
+    | AddTodolistAction
+    | AddTaskAction
+    | DeleteTodolistAction
+    | DeleteTaskAction
+    | UpdateTodoTitleAction
+    | UpdateTaskAction;
 
 export type AppTypes = TodoActionTypes;

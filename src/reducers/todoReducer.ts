@@ -7,15 +7,15 @@ import {
     SET_TODOLISTS,
     UPDATE_TASK,
     UPDATE_TODO_TITLE,
-    TodoActionTypes,
-} from './actions/types';
+    TodoActionTypes
+} from '../actions/types';
 
 const initialState: State = {
     todolists: []
 };
 
-const reducer = (state: State = initialState, action: TodoActionTypes): State => {
-    switch(action.type) {
+export const todoReducer = (state = initialState, action: TodoActionTypes) => {
+    switch (action.type) {
         case SET_TODOLISTS:
             return {
                 ...state,
@@ -71,7 +71,7 @@ const reducer = (state: State = initialState, action: TodoActionTypes): State =>
             return {
                 ...state,
                 todolists: state.todolists.map(tl => {
-                    if(tl.id === action.id) {
+                    if (tl.id === action.id) {
                         return {...tl, title: action.title};
                     } else {
                         return tl;
@@ -85,7 +85,7 @@ const reducer = (state: State = initialState, action: TodoActionTypes): State =>
                     if (tl.id === action.todolistId) {
                         return {
                             ...tl,
-                            tasks: tl.tasks.map((t: any)=> {
+                            tasks: tl.tasks.map((t: any) => {
                                 if (t.id !== action.taskId) {
                                     return t;
                                 } else {
@@ -102,5 +102,3 @@ const reducer = (state: State = initialState, action: TodoActionTypes): State =>
             return state;
     }
 };
-
-export default reducer;

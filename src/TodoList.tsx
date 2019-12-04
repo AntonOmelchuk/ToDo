@@ -17,7 +17,7 @@ import {api} from './api';
 
 interface Props {
     id: string;
-    tasks: any[];
+    tasks: Task[];
     title: string;
     getTasksThunk: (id: string) => void;
     addTaskThunk: (id: string, newText: string) => void;
@@ -48,7 +48,7 @@ const TodoList: React.FC<Props> = ({
 
     const changeFilter = (newFilterValue: string) => setFilterValue(newFilterValue);
 
-    const changeTask = (taskId: string, obj: any) => {
+    const changeTask = (taskId: string, obj: string | number) => {
         tasks.forEach(t => {
             if (t.id === taskId) changeTaskThunk(taskId, obj, id);
         });
@@ -69,8 +69,8 @@ const TodoList: React.FC<Props> = ({
     const updateTodoTitle = (title: string) => updateTodoTitleAC(id, title);
 
     return (
-        <div className="todoList">
-            <div className="todoList-header">
+        <div className='todoList'>
+            <div className='todoList-header'>
                 <TodoListTitle title={title} onUpdateTodoTitle={updateTodoTitle} onDelete={deleteTodolist} />
                 <AddNewItemForm addItem={addTask} />
             </div>

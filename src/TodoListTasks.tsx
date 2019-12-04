@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TodoListTasks: React.FC<Props> = ({tasks, changeStatus, changeTitle, deleteTask}) => {
-    const tasksElements = tasks.map((task: any) => (
+    const tasksElements = tasks.map((task: Task) => (
         <TodoListTask
             task={task}
             key={task.id}
@@ -18,7 +18,7 @@ const TodoListTasks: React.FC<Props> = ({tasks, changeStatus, changeTitle, delet
             deleteTask={deleteTask}
         />
     ));
-    return <div className="todoList-tasks">{tasksElements}</div>;
+    return <div className='todoList-tasks'>{tasksElements}</div>;
 };
 
 export default TodoListTasks;

@@ -16,7 +16,7 @@ const TodoListTitle: React.FC<Props> = ({title, onDelete, onUpdateTodoTitle}) =>
     };
 
     return (
-        <h3 className="todoList-header__title" onDoubleClick={() => setEditMode(true)}>
+        <h3 className='todoList-header__title' onDoubleClick={() => setEditMode(true)}>
             {editMode ? (
                 <input
                     value={localTitle}

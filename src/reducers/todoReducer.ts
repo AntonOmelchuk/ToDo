@@ -14,7 +14,7 @@ const initialState: State = {
     todolists: []
 };
 
-export const todoReducer = (state = initialState, action: TodoActionTypes) => {
+export const todoReducer = (state: State = initialState, action: TodoActionTypes) => {
     switch (action.type) {
         case SET_TODOLISTS:
             return {

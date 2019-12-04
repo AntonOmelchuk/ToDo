@@ -1,68 +1,68 @@
 {
-  "name": "01-todolist",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.14",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-redux": "^7.1.5",
-    "@types/redux": "^3.6.0",
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
-    "@typescript-eslint/parser": "^2.8.0",
-    "axios": "^0.19.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.1",
-    "react-scripts": "3.0.1",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
-    "typescript": "^3.7.2",
-    "uuid": "^3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
-    "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",
-    "eslint:dump": "eslint --print-config ./.eslintrc.json"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.4.3",
-    "prettier": "^1.19.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "01-todolist",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@types/axios": "^0.14.0",
+        "@types/jest": "^24.0.23",
+        "@types/node": "^12.12.14",
+        "@types/react": "^16.9.13",
+        "@types/react-dom": "^16.9.4",
+        "@types/react-redux": "^7.1.5",
+        "@types/redux": "^3.6.0",
+        "@typescript-eslint/eslint-plugin": "^2.8.0",
+        "@typescript-eslint/parser": "^2.8.0",
+        "axios": "^0.19.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-redux": "^7.1.1",
+        "react-scripts": "3.0.1",
+        "redux": "^4.0.4",
+        "redux-thunk": "^2.3.0",
+        "typescript": "^3.7.2",
+        "uuid": "^3.3.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "eslint ./src",
+        "lint:fix": "eslint --fix .js,.jsx,.ts,.tsx src",
+        "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",
+        "eslint:dump": "eslint --print-config ./.eslintrc.json"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "eslint-config-prettier": "^6.7.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "husky": "^3.1.0",
+        "lint-staged": "^9.4.3",
+        "prettier": "^1.19.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js, jsx}": [
+            "npm run lint:fix",
+            "git add"
+        ]
     }
-  },
-  "lint-staged": {
-    "*.{js, jsx}": [
-      "npm run lint:fix",
-      "git add"
-    ]
-  }
 }
